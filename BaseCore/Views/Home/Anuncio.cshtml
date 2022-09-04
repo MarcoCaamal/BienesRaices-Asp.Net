@@ -1,0 +1,34 @@
+﻿@using BaseCore.Entidades;
+@model Propiedad;
+
+@{
+    ViewData["Title"] = "Anuncio";
+}
+
+<main role="main" class="contenedor seccion contenido-centrado">
+    <h1>@Model.Titulo</h1>
+
+
+    <img loading="lazy" src="@Model.Imagen" alt="Propiedad imagen"/>
+
+    <div class="resumen-propiedad">
+        <p class="precio">$@Model.Precio</p>
+
+        <ul class="iconos-caracteristicas">
+            <li>
+                <img loading="lazy" src="~/build/img/icono_wc.svg" alt="Icono WC" />
+                <p>@Model.Wc</p>
+            </li>
+            <li>
+                <img loading="lazy" src="~/build/img/icono_estacionamiento.svg" alt="Icono estacionamiento" />
+                <p>@Model.Estacionamientos</p>
+            </li>
+            <li>
+                <img loading="lazy" src="~/build/img/icono_dormitorio.svg" alt="Icono dormitorio" />
+                <p>@Model.Habitaciones</p>
+            </li>
+        </ul>
+
+        <p>@Model.Descripcion</p>
+    </div>
+</main>

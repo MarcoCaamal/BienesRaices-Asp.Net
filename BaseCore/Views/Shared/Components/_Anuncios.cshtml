@@ -1,0 +1,38 @@
+﻿@using BaseCore.Entidades.ViewModels;
+@model IEnumerable<AnunciosVM>;
+
+<div class="contenedor contenedor-anuncios">
+    @foreach (var anuncio in Model)
+    {
+        <div class="anuncio">
+            <img loading="lazy" src="@anuncio.Imagen" alt="anuncio" />
+
+            <div class="contenido-anuncio">
+                <h3>@anuncio.Titulo</h3>
+                <p>@anuncio.Descripcion</p>
+                <p class="precio">$@anuncio.Precio</p>
+                <ul class="iconos-caracteristicas">
+                    <li>
+                        <img loading="lazy" src="~/build/img/icono_wc.svg" alt="Icono WC" />
+                        <p>@anuncio.Wc</p>
+                    </li>
+                    <li>
+                        <img loading="lazy" src="~/build/img/icono_estacionamiento.svg" alt="Icono estacionamiento" />
+                        <p>@anuncio.Estacionamientos</p>
+                    </li>
+                    <li>
+                        <img loading="lazy" src="~/build/img/icono_dormitorio.svg" alt="Icono dormitorio" />
+                        <p>@anuncio.Habitaciones</p>
+                    </li>
+                </ul>
+                <a 
+                    asp-controller="Home" 
+                    asp-action="Anuncio" 
+                    class="boton-amarillo-block"
+                    asp-route-id="@anuncio.Id">
+                    Ver Propiedad
+                </a>
+            </div><!-- .contenido-anuncio END -->
+        </div><!-- .anuncio END -->
+    }
+</div>

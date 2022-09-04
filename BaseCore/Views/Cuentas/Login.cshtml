@@ -1,0 +1,23 @@
+﻿@using BaseCore.Entidades.ViewModels;
+@model UsuarioRegistroVM;
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<main role="main" class="contenedor seccion">
+    <h1>Iniciar Sesión</h1>
+
+    <form asp-action="Login">
+        <fieldset>
+            <legend>Email y Password</legend>
+
+            <label asp-for="Email">E-mail</label>
+            <input asp-for="Email" placeholder="Tu E-mail" type="email"/>
+
+            <label asp-for="Password">Password:</label>
+            <input asp-for="Password" placeholder="TU Password" type="password"/>
+        </fieldset>
+        <input type="submit" class="boton boton-verde"/>
+    </form>
+</main>
