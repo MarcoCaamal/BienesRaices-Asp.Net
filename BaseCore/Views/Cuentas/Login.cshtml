@@ -5,19 +5,21 @@
     ViewData["Title"] = "Login";
 }
 
-<main role="main" class="contenedor seccion">
+<main role="main" class="contenedor seccion contenido-centrado">
     <h1>Iniciar Sesión</h1>
 
-    <form asp-action="Login">
+    <div asp-validation-summary="All" class="asp-validation-error"></div>
+
+    <form asp-action="Login" class="formulario">
         <fieldset>
             <legend>Email y Password</legend>
 
             <label asp-for="Email">E-mail</label>
-            <input asp-for="Email" placeholder="Tu E-mail" type="email"/>
+            <input asp-for="Email" placeholder="Tu E-mail" type="email" required/>
 
             <label asp-for="Password">Password:</label>
-            <input asp-for="Password" placeholder="TU Password" type="password"/>
+            <input asp-for="Password" placeholder="TU Password" type="password" required/>
         </fieldset>
-        <input type="submit" class="boton boton-verde"/>
+        <input type="submit" class="boton boton-verde" value="Iniciar Sesión"/>
     </form>
 </main>

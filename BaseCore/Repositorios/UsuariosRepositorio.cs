@@ -22,7 +22,8 @@ namespace BaseCore.Repositorios
             using var conncetion = new SqlConnection(_connectionString);
             var id = await conncetion.QuerySingleAsync<int>(@"
                 INSERT INTO Usuarios (Email, EmailNormalizado, PasswordHash)
-                VALUES(@Email, @EmailNormalizado, @PasswordHash);", usuario);
+                VALUES(@Email, @EmailNormalizado, @PasswordHash)
+                SELECT SCOPE_IDENTITY();", usuario);
             return id;
         }
 

@@ -26,7 +26,6 @@ namespace BaseCore.Servicios
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public async Task<Usuario> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
@@ -102,7 +101,8 @@ namespace BaseCore.Servicios
 
         public Task SetNormalizedUserNameAsync(Usuario user, string normalizedName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            user.EmailNormalizado = normalizedName;
+            return Task.CompletedTask;
         }
 
         public Task SetPasswordHashAsync(Usuario user, string passwordHash, CancellationToken cancellationToken)

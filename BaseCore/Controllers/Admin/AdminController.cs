@@ -2,6 +2,7 @@
 using BaseCore.Entidades.ViewModels;
 using BaseCore.Repositorios;
 using BaseCore.Servicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 

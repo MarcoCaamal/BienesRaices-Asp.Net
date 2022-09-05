@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@using BaseCore.Entidades;
+@inject SignInManager<Usuario> SignInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,6 +31,12 @@
                         <a asp-controller="Home" asp-action="Anuncios">Anuncios</a>
                         <a asp-controller="Home" asp-action="Blog">Blog</a>
                         <a asp-controller="Home" asp-action="Contacto">Contacto</a>
+                        @if(SignInManager.IsSignedIn(User))
+                        {
+                            <form asp-controller="Cuentas" asp-action="Logout">
+                                <input type="submit" value="Cerrar Sección"/>
+                            </form>
+                        }
                     </nav>
                 </div>
             </div><!-- .barra -->
