@@ -1,9 +1,9 @@
-using BaseCore.Entidades;
-using BaseCore.Repositorios;
-using BaseCore.Servicios;
+using Domain.Entidades.Cuentas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Repository.Extensions;
+using Services.Services.Usuarios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,12 +16,12 @@ builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(new AuthorizeFilter(politicaUsuariosAutenticados));
 });
+
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddTransient<IVendedoresRepositorio, VendedoresRepositorio>();
-builder.Services.AddTransient<IPropiedadesRepositorio, PropiedadesRepositorio>();
-builder.Services.AddTransient<IAlmacenadorDeArchivos, AlmacenadorDeArchivos>();
-builder.Services.AddTransient<IUsuariosRepositorio, UsuariosRepositorio>();
+builder.Services.AddRepositoriesLayer();
+builder.Services.AddServicesLayer();
+
 builder.Services.AddTransient<IUserStore<Usuario>, UsuarioStoreService>();
 builder.Services.AddTransient<SignInManager<Usuario>>();
 builder.Services.AddIdentityCore<Usuario>(options =>
@@ -41,6 +41,8 @@ builder.Services.AddAuthentication(options =>
     options.LoginPath = "/cuentas/login";
 });
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,6 +51,10 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+else
+{
+    app.UseStatusCodePagesWithRedirects("Home/ErrorFound/{0}");
 }
 
 app.UseHttpsRedirection();

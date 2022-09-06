@@ -1,0 +1,61 @@
+﻿@using BaseCore.Entidades.ViewModels;
+@model PropiedadCreacionVM;
+
+@{
+    ViewData["Title"] = "Actualizar";
+}
+
+<main role="main" class="contenedor seccion">
+    <h1>@ViewData["Title"]</h1>
+
+    <a asp-controller="Admin" asp-action="Index" class="boton-verde">Volver</a>
+
+    <div asp-validation-summary="All" class="asp-validation-error"></div>
+
+    <form asp-action="Editar" class="formulario" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Propiedad.Id"/>
+        <input type="hidden" asp-for="Propiedad.Imagen"/>
+        <input type="hidden" asp-for="Propiedad.Creado"/>
+        <fieldset>
+            <legend>Información General</legend>
+
+            <label asp-for="Propiedad.Titulo">Titulo:</label>
+            <input asp-for="Propiedad.Titulo" placeholder="Titulo Propiedad" />
+
+            <label asp-for="Propiedad.Precio">Precio:</label>
+            <input asp-for="Propiedad.Precio" placeholder="Precio Propiedad" type="number" />
+
+            <label asp-for="ImagenPropiedad">Imagen:</label>
+            <input asp-for="ImagenPropiedad" accept="image/jpeg, image/png" />
+
+            <img src="@Model.Propiedad.Imagen" class="imagen-small"/>
+
+            <label asp-for="Propiedad.Descripcion">Descripción:</label>
+            <textarea asp-for="Propiedad.Descripcion"></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Información Propiedad:</legend>
+
+            <label asp-for="Propiedad.Habitaciones">Habitaciones:</label>
+            <input asp-for="Propiedad.Habitaciones" placeholder="Ej: 3" min="1" max="9" />
+
+            <label asp-for="Propiedad.Wc">Baños:</label>
+            <input asp-for="Propiedad.Wc" placeholder="Ej: 3" min="1" max="9" />
+
+            <label asp-for="Propiedad.Estacionamiento">Estacionamientos:</label>
+            <input asp-for="Propiedad.Estacionamiento" placeholder="Ej: 3" min="1" max="9" />
+        </fieldset>
+
+        <fieldset>
+            <legend>Información Vendedor</legend>
+
+            <label asp-for="Propiedad.VendedorId">Vendedor:</label>
+            <select asp-for="Propiedad.VendedorId" asp-items="@Model.Vendedores">
+                <option value="" selected disabled>-- Seleccionar --</option>
+            </select>
+        </fieldset>
+
+        <input class="boton-verde" type="submit" value="Actualizar Propiedad" />
+    </form>
+</main>

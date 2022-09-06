@@ -1,0 +1,91 @@
+﻿@using Domain.Entidades.Cuentas.ViewModels
+@model IndexAdminVM;
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<main role="main" class="contenedor seccion">
+    <h1>Administrador de Bienes Raices</h1>
+
+    @if (TempData["Success"] != null)
+    {
+        <p class="alerta exito">@TempData["Success"]</p>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <p class="alerta error">@TempData["Error"]</p>
+    }
+
+    <a asp-controller="Propiedades" asp-action="Crear" class="boton-verde">Nueva Propiedad</a>
+    <a asp-controller="Vendedores" asp-action="Crear" class="boton-amarillo">Nuevo(a) Vendedor</a>
+
+    <h2>Propiedades</h2>
+    <table class="propiedades">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Imagen</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var propiedad in Model.Propiedades)
+            {
+                <tr>
+                    <td>@propiedad.Id</td>
+                    <td>@propiedad.Titulo</td>
+                    <td><img class="imagen-tabla" src="@propiedad.Imagen" alt="Imagen Propiedad" /></td>
+                    <td>$@propiedad.Precio</td>
+                    <td>
+                        <form asp-action="Eliminar" asp-controller="Propiedades">
+                            <input type="hidden" name="id" value="@propiedad.Id" />
+                            <input type="submit" class="boton-rojo-block" value="Eliminar" />
+                        </form>
+                        <a class="boton-amarillo-block"
+                       asp-controller="Propiedades"
+                       asp-action="Editar"
+                       asp-route-id="@propiedad.Id">Actualizar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Vendores</h2>
+    <table class="vendedores">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var vendedor in Model.Vendedores)
+            {
+                <tr>
+                    <td>@vendedor.Id</td>
+                    <td>@vendedor.Nombre @vendedor.Apellido</td>
+                    <td>@vendedor.Telefono</td>
+                    <td>
+                        <form asp-action="Eliminar" asp-controller="Vendedores">
+                            <input type="hidden" name="id" value="@vendedor.Id" />
+                            <input type="submit" class="boton-rojo-block" value="Eliminar" />
+                        </form>
+                        <a class="boton-amarillo-block"
+                       asp-controller="Vendedores"
+                       asp-action="Editar"
+                       asp-route-id="@vendedor.Id">Actualizar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</main>

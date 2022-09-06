@@ -1,0 +1,39 @@
+﻿@using Domain.Entidades.Vendedores;
+@model Vendedor;
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<main role="main" class="contenedor seccion">
+    <h1>Actualizar Vendedor(a)</h1>
+
+    <a asp-action="Admin" asp-controller="Home" class="boton-verde">Volver</a>
+
+    <div asp-validation-summary="All" class="asp-validation-error"></div>
+
+    @if (ViewData["Error"] != null)
+    {
+        <p class="alerta error">@ViewData["Error"]</p>
+    }
+
+    <form asp-action="Editar" class="formulario">
+        <input type="hidden" asp-for="Id"/>
+        <fieldset>
+            <legend>Información General</legend>
+
+            <label asp-for="Nombre">Nombre:</label>
+            <input asp-for="Nombre" type="text" placeholder="Nombre Vendedor(a)" />
+
+            <label asp-for="Apellido">Apellido:</label>
+            <input asp-for="Apellido" type="text" placeholder="Apellido Vendedor(a)" />
+        </fieldset>
+
+        <fieldset>
+            <legend>Información Extra</legend>
+
+            <label asp-for="Telefono">Telefono:</label>
+            <input asp-for="Telefono" type="tel" placeholder="Teléfono Vendedor(a)" />
+        </fieldset>
+        <input type="submit" class="boton-verde" />
+    </form>
+</main>
