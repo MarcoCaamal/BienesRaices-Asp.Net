@@ -1,46 +1,54 @@
-﻿@{
+﻿@using Domain.Entidades.Contacto;
+@using static Common.Enums.Enums
+@model ContactoVM;
+
+@{
     ViewData["Title"] = "Contacto";
 }
 
 <main role="main" class="contenedor seccion">
     <h1>Contacto</h1>
 
+    <div asp-validation-summary="All" class="asp-validation-error"></div>
+
+    @if (ViewData["Error"] != null)
+    {
+        <p class="alerta error">@ViewData["Error"]</p>
+    }
+
+    @if (ViewData["Success"] != null)
+    {
+        <p class="alerta exito">@ViewData["Success"]</p>
+    }
+
     <picture>
         <source srcset="~/build/img/destacada3.webp" type="image/webp" />
         <source srcset="~/build/img/destacada3.jpg" type="image/jpeg" />
-        <img loading="lazy" src="~/build/img/destacada3.jpg" alt="Imagen contacto"/>
+        <img loading="lazy" src="~/build/img/destacada3.jpg" alt="Imagen contacto" />
     </picture>
 
     <h2>Llene el formulario de Contacto</h2>
-    <form class="formulario">
+    <form class="formulario" asp-action="Contacto">
         <fieldset>
             <legend>Información Personal</legend>
 
-            <label for="nombre">Nombre</label>
-            <input type="text" placeholder="Tu Nombre" id="nombre"/>
+            <label asp-for="Nombre">Nombre:</label>
+            <input asp-for="Nombre" type="text" placeholder="Tu Nombre" />
 
-            <label for="email">E-mail</label>
-            <input type="email" placeholder="Tu E-mail" id="email"/>
-
-            <label for="telefono">Teléfono</label>
-            <input type="tel" placeholder="Tu Teléfono" id="telefono"/>
-
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje"></textarea>
+            <label asp-for="Mensaje">Mensaje:</label>
+            <textarea asp-for="Mensaje"></textarea>
         </fieldset>
 
         <fieldset>
             <legend>Información sobre la propiedad</legend>
 
-            <label for="opciones">Vende o Compra</label>
-            <select id="opciones">
-                <option value="" selected disabled>-- Seleccione --</option>
-                <option value="Compra">Compra</option>
-                <option value="Compra">Vende</option>
+            <label asp-for="OpcionVendeCompra">Vende o Compra:</label>
+            <select asp-for="OpcionVendeCompra" asp-items="Html.GetEnumSelectList<OpcionCompraVenta>()">
+                <option value="" selected disabled>-- Seleccione una opción --</option>
             </select>
 
-            <label for="presupuesto">Precio o Presupuesto</label>
-            <input type="number" placeholder="Tu Precio o Presupuesto" id="presupuesto" />
+            <label asp-for="PrecioPresupuesto">Precio o Presupuesto:</label>
+            <input asp-for="PrecioPresupuesto" type="number" placeholder="Tu Precio o Presupuesto" />
         </fieldset>
         <fieldset>
             <legend>Contacto</legend>
@@ -48,18 +56,20 @@
             <p>Como desea ser contactado</p>
 
             <div class="forma-contacto">
-                <label for="contactar-telefono">Teléfono</label>
-                <input type="radio" value="telefono" id="contactar-telefono" name="contacto"/>
-                <label for="contactar-email">E-mail</label>
-                <input type="radio" value="email" id="contactar-email" name="contacto" />
+                @foreach (var opcion in ViewBag.opcionesContacto)
+                {
+                    <label for="@opcion.Value">@opcion.Text</label>
+                    <input 
+                       type="radio"
+                       value="@opcion.Value"
+                       id="@opcion.Value"
+                       name="OpcionContacto" 
+                       checked="@opcion.Selected" />
+                }
             </div>
 
-            <p>Si eligio teléfono, elija la fecha y la hora</p>
-            <label for="fecha">Fecha</label>
-            <input type="date" id="fecha" />
-            <label for="hora">Hora</label>
-            <input type="time" id="hora" min="09:00" max="18:00"/>
+            <div id="contacto"></div>
         </fieldset>
-        <input type="submit" class="boton-verde" value="Enviar"/>
+        <input type="submit" class="boton-verde" value="Enviar" />
     </form>
 </main>
