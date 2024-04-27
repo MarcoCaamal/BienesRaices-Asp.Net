@@ -10,6 +10,6 @@ namespace Repository.IRepositories.Propiedades
         Task<int> Eliminar(int? id);
         Task<IEnumerable<Propiedad>> ObtenerLista();
         Task<IEnumerable<Propiedad>> ObtenerLista(int? numeroRegistros);
-        Task<Propiedad> ObtenerPorId(int? id);
+        Task<Propiedad?> ObtenerPorId(int? id);
     }
 }

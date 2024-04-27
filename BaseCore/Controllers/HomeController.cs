@@ -134,7 +134,7 @@ namespace BaseCore.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private List<SelectListItem> ObtenerOpcionesContacto(string opcionSeleccionada = null)
+        private List<SelectListItem> ObtenerOpcionesContacto(string? opcionSeleccionada = null)
         {
             if (string.IsNullOrEmpty(opcionSeleccionada))
             {

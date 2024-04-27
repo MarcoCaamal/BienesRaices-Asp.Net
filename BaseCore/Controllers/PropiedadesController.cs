@@ -85,6 +85,13 @@ namespace BaseCore.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(model.Propiedad is null)
+                {
+                    ModelState.AddModelError("Propiedad", "No se proporciono la propiedad correctamente.");
+                    model.Vendedores = await ObtenerVendedores();
+                    return View(model);
+                }
+
                 var vendedor = await _vendedoresService.ObtenerPorId(model.Propiedad.VendedorId);
 
                 if(vendedor is null)
@@ -122,7 +129,7 @@ namespace BaseCore.Controllers
 
             if (propiedad is null)
             {
-                TempData["Error"] = $"La propiedad con el ID {propiedad.Id} no fue encontrada.";
+                TempData["Error"] = $"La propiedad con el ID {id} no fue encontrada.";
                 return RedirectToAction("Admin", "Home");
             }
 

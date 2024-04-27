@@ -5,7 +5,7 @@ namespace BaseCore.Validaciones
 {
     public class TipoArchivoValidacionAttribute: ValidationAttribute
     {
-        private readonly string[] _tiposValidos;
+        private readonly string[]? _tiposValidos;
 
         public TipoArchivoValidacionAttribute(string[] tiposValidos)
         {
@@ -19,18 +19,18 @@ namespace BaseCore.Validaciones
                 _tiposValidos = new string[] { "image/jpg", "image/jpeg", "image/webp", "image/gif", "image/png" };
             }
         }
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
         {
-            if (value is null)
+            if (value is null || _tiposValidos is null)
             {
-                return ValidationResult.Success;
+                return ValidationResult.Success!;
             }
 
-            IFormFile formFile = value as IFormFile;//Conversion del object
+            IFormFile? formFile = value as IFormFile;//Conversion del object
 
             if (formFile is null)
             {
-                return ValidationResult.Success;
+                return ValidationResult.Success!;
             }
 
             if (!_tiposValidos.Contains(formFile.ContentType))
@@ -38,7 +38,7 @@ namespace BaseCore.Validaciones
                 return new ValidationResult($"El tipo de archivo debe ser uno de los siguiente: {string.Join(", ",_tiposValidos)}");
             }
 
-            return ValidationResult.Success;
+            return ValidationResult.Success!;
         }
     }
 }

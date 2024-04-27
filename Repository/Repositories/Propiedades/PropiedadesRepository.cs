@@ -27,10 +27,10 @@ namespace Repository.Repositories.Propiedades
             return await connection.QueryAsync<Propiedad>(@$"SELECT TOP({numeroRegistros}) * FROM Propiedades");
         }
 
-        public async Task<Propiedad> ObtenerPorId(int? id)
+        public async Task<Propiedad?> ObtenerPorId(int? id)
         {
             using var connection = new SqlConnection(_connectionString);
-            return await connection.QuerySingleOrDefaultAsync<Propiedad>(
+            return await connection.QuerySingleOrDefaultAsync<Propiedad?>(
                 @"SELECT * FROM Propiedades WHERE Id = @Id", new { id });
         }
 

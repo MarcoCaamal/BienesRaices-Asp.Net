@@ -14,7 +14,7 @@ namespace Repository.Repositories.Vendedores
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public async Task<Vendedor> ObtenerPorId(int? id)
+        public async Task<Vendedor?> ObtenerPorId(int? id)
         {
             using var connection = new SqlConnection(_connectionString);
             return await connection.QueryFirstOrDefaultAsync<Vendedor>("SELECT * FROM Vendedores WHERE Id = @Id", new { id });

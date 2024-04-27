@@ -31,9 +31,9 @@ namespace Services.Services.Propiedades
             _logger = logger;
         }
 
-        public async Task<IEnumerable<Propiedad>> ObtenerLista()
+        public async Task<IEnumerable<Propiedad>?> ObtenerLista()
         {
-            IEnumerable<Propiedad> lista = null;
+            IEnumerable<Propiedad>? lista = null;
             try
             {
                 lista = await _propiedadesRepository.ObtenerLista();
@@ -45,9 +45,9 @@ namespace Services.Services.Propiedades
             return lista;
         }
 
-        public async Task<IEnumerable<AnunciosVM>> ObtenerListaParaAnuncios()
+        public async Task<IEnumerable<AnunciosVM>?> ObtenerListaParaAnuncios()
         {
-            IEnumerable<Propiedad> lista = null;
+            IEnumerable<Propiedad>? lista = null;
             try
             {
                 lista = await _propiedadesRepository.ObtenerLista();
@@ -59,9 +59,9 @@ namespace Services.Services.Propiedades
             return _mapper.Map<IEnumerable<AnunciosVM>>(lista);
         }
 
-        public async Task<IEnumerable<AnunciosVM>> ObtenerListaParaAnuncios(int? numeroRegistros)
+        public async Task<IEnumerable<AnunciosVM>?> ObtenerListaParaAnuncios(int? numeroRegistros)
         {
-            IEnumerable<Propiedad> lista = null;
+            IEnumerable<Propiedad>? lista = null;
             try
             {
                 lista = await _propiedadesRepository.ObtenerLista(numeroRegistros);
@@ -73,9 +73,9 @@ namespace Services.Services.Propiedades
             return _mapper.Map<IEnumerable<AnunciosVM>>(lista);
         }
 
-        public async Task<IEnumerable<IndexPropiedadesVM>> ObtenerListaParaIndex()
+        public async Task<IEnumerable<IndexPropiedadesVM>?> ObtenerListaParaIndex()
         {
-            IEnumerable<Propiedad> lista = null;
+            IEnumerable<Propiedad>? lista = null;
             try
             {
                 lista = await _propiedadesRepository.ObtenerLista(numeroRegistros: 3);
@@ -87,7 +87,7 @@ namespace Services.Services.Propiedades
             return _mapper.Map<IEnumerable<IndexPropiedadesVM>>(lista);
         }
 
-        public async Task<Propiedad> ObtenerPorId(int? id)
+        public async Task<Propiedad?> ObtenerPorId(int? id)
         {
             var propiedad = new Propiedad();
             try
@@ -105,10 +105,21 @@ namespace Services.Services.Propiedades
         {
             var response = new ResponseHelper();
             var propiedad = model.Propiedad;
+
+            if(propiedad is null)
+            {
+                response.Success = false;
+                response.Message = PropiedadesMensajes.CreacionError;
+                return response;
+            }
+
             try
             {
                 propiedad.Creado = DateTime.Now;
-                propiedad.Imagen = await _almacenadorArchivosService.GuardarImagen(model.ImagenPropiedad, _contenedor, rootPath);
+                if(model.ImagenPropiedad is not null)
+                {
+                    propiedad.Imagen = await _almacenadorArchivosService.GuardarImagen(model.ImagenPropiedad, _contenedor, rootPath);
+                }
 
                 if (string.IsNullOrEmpty(propiedad.Imagen))
                 {
@@ -138,6 +149,14 @@ namespace Services.Services.Propiedades
         {
             var response = new ResponseHelper();
             var propiedad = model.Propiedad;
+
+            if(propiedad is null)
+            {
+                response.Success = false;
+                response.Message = PropiedadesMensajes.EdicionError;
+                return response;
+            }
+
             try
             {
                 if(model.ImagenPropiedad != null)

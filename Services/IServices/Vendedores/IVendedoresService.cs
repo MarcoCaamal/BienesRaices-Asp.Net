@@ -8,7 +8,7 @@ namespace Services.IServices.Vendedores
         Task<ResponseHelper> Crear(Vendedor model);
         Task<ResponseHelper> Editar(Vendedor model);
         Task<ResponseHelper> Eliminar(int? id);
-        Task<IEnumerable<Vendedor>> ObtenerLista();
-        Task<Vendedor> ObtenerPorId(int? id);
+        Task<IEnumerable<Vendedor>?> ObtenerLista();
+        Task<Vendedor?> ObtenerPorId(int? id);
     }
 }

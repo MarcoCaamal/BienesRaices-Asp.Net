@@ -12,18 +12,18 @@ namespace BaseCore.Validaciones
             _pesoMaximoEnMegaByte = PesoMaximoEnMegaByte;
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
         {
             if(value is null)
             {
-                return ValidationResult.Success;
+                return ValidationResult.Success!;
             }
 
-            IFormFile formFile = value as IFormFile;//Conversion del object
+            IFormFile? formFile = value as IFormFile;//Conversion del object
 
             if (formFile is null)
             {
-                return ValidationResult.Success;
+                return ValidationResult.Success!;
             }
 
             if(formFile.Length > _pesoMaximoEnMegaByte * 1024 * 1024)
@@ -31,7 +31,7 @@ namespace BaseCore.Validaciones
                 return new ValidationResult($"El peso del archivo no debe ser mayor a {this._pesoMaximoEnMegaByte}mb.");
             }
 
-            return ValidationResult.Success;
+            return ValidationResult.Success!;
         }
     }
 }

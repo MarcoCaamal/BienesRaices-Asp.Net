@@ -5,7 +5,7 @@ namespace Domain.Entidades.Cuentas.ViewModels
 {
     public class IndexAdminVM
     {
-        public IEnumerable<Propiedad> Propiedades { get; set; }
-        public IEnumerable<Vendedor> Vendedores { get; set; }
+        public IEnumerable<Propiedad>? Propiedades { get; set; }
+        public IEnumerable<Vendedor>? Vendedores { get; set; }
     }
 }

@@ -6,8 +6,8 @@ namespace Domain.Entidades.Cuentas.ViewModels
     {
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [EmailAddress(ErrorMessage = "El campo {0} no contiene un Email valido.")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
         [Required(ErrorMessage = "El campo {0} es requerido.")]
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
     }
 }

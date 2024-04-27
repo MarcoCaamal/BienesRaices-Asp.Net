@@ -11,21 +11,21 @@ namespace BaseCore.Validaciones
             LongitudMinima = logitudMinima;
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
         {
             if(value == null || string.IsNullOrEmpty(value.ToString()))
             {
-                return ValidationResult.Success;
+                return ValidationResult.Success!;
             }
 
-            var longitud = value.ToString().Length;
+            var longitud = value.ToString()?.Length;
 
-            if(longitud < this.LongitudMinima)
+            if(longitud < LongitudMinima)
             {
                 return new ValidationResult($"La longitud del texto debe tener un minimo de {this.LongitudMinima}");
             }
 
-            return ValidationResult.Success;
+            return ValidationResult.Success!;
         }
     }
 }

@@ -23,9 +23,9 @@ namespace Services.Services.Vendedores
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Vendedor>> ObtenerLista()
+        public async Task<IEnumerable<Vendedor>?> ObtenerLista()
         {
-            IEnumerable<Vendedor> lista = null;
+            IEnumerable<Vendedor>? lista = null;
             try
             {
                 lista = await _vendedoresRepository.ObtenerLista();
@@ -37,7 +37,7 @@ namespace Services.Services.Vendedores
             return lista;
         }
 
-        public async Task<Vendedor> ObtenerPorId(int? id)
+        public async Task<Vendedor?> ObtenerPorId(int? id)
         {
             var vendedor = new Vendedor();
             try

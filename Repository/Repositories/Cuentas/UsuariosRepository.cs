@@ -24,7 +24,7 @@ namespace Repository.Repositories.Cuentas
             return id;
         }
 
-        public async Task<Usuario> BuscarUsuarioPorEmail(string emailNormalizado)
+        public async Task<Usuario?> BuscarUsuarioPorEmail(string emailNormalizado)
         {
             using var connection = new SqlConnection(_connectionString);
             return await connection.QuerySingleOrDefaultAsync<Usuario>(

@@ -7,12 +7,12 @@ namespace Domain.Entidades.Propiedades
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        public string Titulo { get; set; }
+        public string Titulo { get; set; } = string.Empty;
         [Required(ErrorMessage = "El campo {0} es requerido")]
         public decimal? Precio { get; set; }
-        public string Imagen { get; set; }
+        public string Imagen { get; set; } = string.Empty;
         [LongitudStringMinima(logitudMinima: 50)]
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = string.Empty;
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1, 9, ErrorMessage = "El campo {0} solo acepta valores de {1} al {2}.")]
         public int? Habitaciones { get; set; }
