@@ -57,7 +57,7 @@ namespace BaseCore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Anuncios()
         {
-            ViewBag.anuncios = await _propiedadesService.ObtenerListaParaAnuncios();
+            ViewBag.Anuncios = await _propiedadesService.ObtenerListaParaAnuncios();
             return View();
         }
 

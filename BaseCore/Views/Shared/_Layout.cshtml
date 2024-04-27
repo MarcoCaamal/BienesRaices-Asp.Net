@@ -36,6 +36,9 @@
                             <form asp-controller="Cuentas" asp-action="Logout">
                                 <input type="submit" value="Cerrar Sección"/>
                             </form>
+                        } else
+                        {
+                            <a asp-controller="Cuentas" asp-action="Login">Iniciar Sesión</a>
                         }
                     </nav>
                 </div>

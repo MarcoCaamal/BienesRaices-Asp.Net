@@ -81,5 +81,15 @@ namespace BaseCore.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Seed()
+        {
+            var response = await _userManager.CreateAsync(new Usuario() 
+            { 
+                Email = "admin@admin.com"
+            }, "password");
+            return Ok(response);
+        }
     }
 }

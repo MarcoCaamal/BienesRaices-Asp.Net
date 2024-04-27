@@ -101,7 +101,7 @@ namespace Services.Services.Vendedores
                 if (await _vendedoresRepository.Editar(model) > 0)
                 {
                     response.Success = true;
-                    response.Message = VendedoresMensajes.CreacionExitosa;
+                    response.Message = VendedoresMensajes.EdicionExitosa;
                     _logger.LogInformation(response.Message);
                     return response;
                 }

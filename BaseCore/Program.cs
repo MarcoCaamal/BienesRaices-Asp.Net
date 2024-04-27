@@ -22,7 +22,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddRepositoriesLayer();
 builder.Services.AddServicesLayer();
 
-builder.Services.AddTransient<IUserStore<Usuario>, UsuarioStoreService>();
+builder.Services.AddTransient<IUserStore<Usuario?>, UsuarioStoreService>();
 builder.Services.AddTransient<SignInManager<Usuario>>();
 builder.Services.AddIdentityCore<Usuario>(options =>
 {
@@ -54,7 +54,7 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseStatusCodePagesWithRedirects("Home/ErrorFound/{0}");
+    app.UseStatusCodePagesWithRedirects("/Home/ErrorFound/{0}");
 }
 
 app.UseHttpsRedirection();
