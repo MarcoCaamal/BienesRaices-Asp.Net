@@ -38,6 +38,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
 }).AddCookie(IdentityConstants.ApplicationScheme, options =>
 {
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
     options.LoginPath = "/cuentas/login";
 });
 
